@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import Button from '~/components/Button';
-function App() {
-  return (
-    <Button/>
-  );
-=======
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { publicRouters } from '~/routes';
 import { DefaultLayout } from '~/components/Layout';
@@ -37,7 +30,6 @@ function App() {
             </div>
         </BrowserRouter>
     );
->>>>>>> a4267f84ff8a886dfd4a2991f8380c82af122d7e
 }
 
 export default App;
