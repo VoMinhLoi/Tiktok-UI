@@ -68,4 +68,7 @@
     border-bottom-right-radius: var(--search-border-radius);
     font-size: 1.8rem;
     color: var(--text-color);
+    &:active {
+        background-color: rgba(22, 24, 35, 0.06);
+    }
 }
