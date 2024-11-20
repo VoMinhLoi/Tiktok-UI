@@ -4,6 +4,8 @@
     --primary: #fe2c55;
     --default-layout-header-height: 60px;
     --default-layout-width: 1150px;
+    --black: #000;
+    --text-color: #afacac;
 }
 * {
     box-sizing: border-box;
@@ -20,4 +22,15 @@ body {
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+}
+
+input,
+button,
+[name='tabindex'] {
+    border: none;
+    outline: none;
+}
+
+a[href] {
+    color: var(--text-color);
 }
