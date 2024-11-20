@@ -53,8 +53,10 @@ const Header = () => {
                     </div>
                 </Tippy>
                 <div className={cx('action')}>
-                    <Button>Upload</Button>
-                    <Button primary>Log in</Button>
+                    <Button text>Upload</Button>
+                    <Button outline large>
+                        Log in
+                    </Button>
                 </div>
             </div>
         </header>
