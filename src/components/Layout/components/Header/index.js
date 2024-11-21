@@ -12,11 +12,11 @@ import Button from '~/components/Button';
 const Header = () => {
     const cx = classNames.bind(styles);
     const [searchResult, setSearchResult] = useState([]);
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setSearchResult([1, 2, 3]);
-    //     }, 3000);
-    // }, []);
+    useEffect(() => {
+        setTimeout(() => {
+            setSearchResult([]);
+        }, 3000);
+    }, []);
     return (
         <header className={styles.wrapper}>
             <div className={cx('inner')}>
