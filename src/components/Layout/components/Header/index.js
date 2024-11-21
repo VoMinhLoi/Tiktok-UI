@@ -22,7 +22,7 @@ const MENU_ITEM = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'English',
-        chidlren: {
+        children: {
             title: 'Language',
             data: [
                 {
@@ -54,6 +54,14 @@ const Header = () => {
             setSearchResult([]);
         }, 3000);
     }, []);
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                // Handle change language
+                break;
+            default:
+        }
+    };
     return (
         <header className={styles.wrapper}>
             <div className={cx('inner')}>
@@ -93,7 +101,7 @@ const Header = () => {
                     <Button text>Upload</Button>
                     <Button primary>Log in</Button>
                 </div>
-                <Menu items={MENU_ITEM}>
+                <Menu items={MENU_ITEM} onChange={handleMenuChange}>
                     <button className={cx('more-btn')}>
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                     </button>

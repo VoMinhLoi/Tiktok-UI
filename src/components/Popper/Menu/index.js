@@ -6,24 +6,41 @@ import MenuItem from './MenuItem';
 import Header from './Header';
 import { useState } from 'react';
 const cx = classNames.bind(styles);
-function Menu({ children, items = [] }) {
+const defaultFn = () => {};
+function Menu({ children, items = [], onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
-    const current = history[history.length - 1];
+    const currentHistory = history[history.length - 1];
     const renderItems = () => {
-        return items.map((item, index) => {
-            // Ddang con nay
-            return <MenuItem data={item} key={index} />;
+        return currentHistory.data.map((item, index) => {
+            const isParent = !!item.children;
+            return (
+                <MenuItem
+                    data={item}
+                    key={index}
+                    onClick={() => {
+                        if (isParent) setHistory((preHistory) => [...preHistory, item.children]);
+                        else onChange(item);
+                    }}
+                />
+            );
         });
     };
     return (
         <Tippy
             interactive
-            delay={[0, 700]}
+            delay={[0, 200]}
             placement="bottom-end"
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
                     <PopperWrapper className={cx('menu-popper')}>
-                        <Header title={'Languages'} />
+                        {history.length > 1 && (
+                            <Header
+                                title="Languages"
+                                onBack={() => {
+                                    setHistory((preHistory) => preHistory.slice(0, -1));
+                                }}
+                            />
+                        )}
                         {renderItems()}
                     </PopperWrapper>
                 </div>
@@ -33,5 +50,4 @@ function Menu({ children, items = [] }) {
         </Tippy>
     );
 }
-
 export default Menu;
