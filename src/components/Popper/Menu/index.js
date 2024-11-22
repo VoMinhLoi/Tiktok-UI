@@ -29,6 +29,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
         <Tippy
             interactive
             delay={[0, 200]}
+            offset={[12, 8]}
             placement="bottom-end"
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
