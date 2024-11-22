@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
     faCircleXmark,
-    faCloudUpload,
     faCoins,
     faEarthAsia,
     faEllipsisVertical,
@@ -24,6 +23,8 @@ import { Wrapper as PobberWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+import { UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 const MENU_ITEM = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
@@ -133,7 +134,7 @@ const Header = () => {
                         <>
                             <Tippy content="Upload video" placement="bottom" deplay={[0, 200]}>
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <UploadIcon />
                                 </button>
                             </Tippy>
                         </>
@@ -146,10 +147,11 @@ const Header = () => {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEM} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 src="https://scontent.fdad7-1.fna.fbcdn.net/v/t1.6435-9/161957969_1051139288711176_7404328044789997673_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=94e2a3&_nc_ohc=YxZ-UfKlMyEQ7kNvgE6qdDR&_nc_zt=23&_nc_ht=scontent.fdad7-1.fna&_nc_gid=Aai0gAgqdnl24kSwQMQ6OIk&oh=00_AYAEH_b0eQY6fxGxu0UrUJcIobPV7A8IfxeAmLVbNO3bdw&oe=6764FF24"
                                 className={cx('user-avatar')}
                                 alt="Vo Minh Loi"
+                                fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
