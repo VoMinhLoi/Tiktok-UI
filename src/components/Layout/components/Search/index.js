@@ -1,4 +1,4 @@
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { Wrapper as PobberWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
@@ -13,11 +13,21 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 2000);
-    }, []);
+        if (searchValue.trim()) {
+            setLoading(true);
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+                .then((streamResponse) => streamResponse.json())
+                .then((result) => {
+                    setSearchResult(result.data);
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setLoading(false);
+                });
+        }
+    }, [searchValue]);
     const hanldeSearch = (e) => {
         const userTypeSearchType = e.target.value;
         if (userTypeSearchType === '') setSearchResult([]);
@@ -37,10 +47,9 @@ function Search() {
                     <div className={cx('search-result')} tabIndex={-1} {...attrs}>
                         <PobberWrapper>
                             <h1 className={cx('search-title')}>Accounts</h1>
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
+                            {searchResult.map((user) => {
+                                return <AccountItem data={user} />;
+                            })}
                         </PobberWrapper>
                     </div>
                 );
@@ -60,12 +69,12 @@ function Search() {
                         setShowResult(true);
                     }}
                 />
-                {!!searchValue && (
+                {!loading && !!searchValue && (
                     <button className={cx('clear')} onClick={hanldeClearSearch}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
-                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
                 <button className={cx('search-btn')}>
                     <SearchIcon />

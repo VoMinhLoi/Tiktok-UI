@@ -17,7 +17,6 @@ function App() {
                             <Route
                                 key={index}
                                 path={route.path}
-                                to
                                 element={
                                     <Layout>
                                         <Page />

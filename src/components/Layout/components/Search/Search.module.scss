@@ -52,6 +52,17 @@
     right: calc(var(--search-button-width) + 16px);
     color: rgb(167 167 171);
 }
+.loading {
+    animation: spinner 0.8s infinite;
+}
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
 .search-btn {
     width: var(--search-button-width);
     height: 100%;
