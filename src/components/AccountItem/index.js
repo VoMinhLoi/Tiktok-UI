@@ -5,9 +5,9 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Image from '~/components/Image';
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
-function AccountItem({ data }) {
+function AccountItem({ data, itemKey }) {
     return (
-        <Link to={`/${data.nickname}`} className={cx('wrapper')}>
+        <Link to={`/${data.nickname}`} className={cx('wrapper')} key={itemKey}>
             <Image src={data.avatar} alt="avatar" className={cx('avatar')} />
             <div className={cx('infor')}>
                 <h4 className={cx('name')}>
