@@ -19,6 +19,8 @@ import Menu from '~/components/Popper/Menu';
 import { UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
+import { Link } from 'react-router-dom';
+import routesConfig from '~/config/routes';
 const MENU_ITEM = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
@@ -86,9 +88,9 @@ const Header = () => {
     return (
         <header className={styles.wrapper}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Link to={routesConfig.home} className={cx('logo')}>
                     <img src={images.logo} alt="logo-tiktok" />
-                </div>
+                </Link>
                 {/* Search */}
                 <Search />
                 <div className={cx('action')}>

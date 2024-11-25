@@ -31,9 +31,9 @@ function Search() {
             setSearchResult([]);
         }
     }, [debounced]);
-    const hanldeSearch = (e) => {
-        const userTypeSearchType = e.target.value;
-        setSearchValue(userTypeSearchType);
+    const hanldeChange = (e) => {
+        const userTypeSearchValueType = e.target.value;
+        if (!userTypeSearchValueType.startsWith(' ')) setSearchValue(userTypeSearchValueType);
     };
     const hanldeClearSearch = () => {
         setSearchValue('');
@@ -66,7 +66,7 @@ function Search() {
                     value={searchValue}
                     placeholder="Search accounts and videos"
                     spellCheck={false}
-                    onChange={hanldeSearch}
+                    onChange={hanldeChange}
                     onFocus={() => {
                         setShowResult(true);
                     }}
@@ -78,7 +78,12 @@ function Search() {
                 )}
                 {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                <button className={cx('search-btn')}>
+                <button
+                    className={cx('search-btn')}
+                    onMouseDown={(e) => {
+                        e.preventDefault();
+                    }}
+                >
                     <SearchIcon />
                 </button>
             </div>
