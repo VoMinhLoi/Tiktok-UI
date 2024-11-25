@@ -8,6 +8,7 @@ import styles from './Search.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
+import * as searchServices from '~/apiServices/searchServices';
 const cx = classNames.bind(styles);
 function Search() {
     const inputSearchValueRef = useRef();
@@ -16,24 +17,22 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
     const debounced = useDebounce(searchValue, 700);
-    console.log(debounced);
+    // console.log(debounced);
     useEffect(() => {
         if (debounced.trim()) {
-            setLoading(true);
-            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-                .then((streamResponse) => streamResponse.json())
-                .then((result) => {
-                    setSearchResult(result.data);
-                    setLoading(false);
-                })
-                .catch(() => {
-                    setLoading(false);
-                });
+            const fetchAPI = async () => {
+                setLoading(true);
+                const result = await searchServices.search(debounced);
+                setSearchResult(result);
+                setLoading(false);
+            };
+            fetchAPI();
+        } else {
+            setSearchResult([]);
         }
     }, [debounced]);
     const hanldeSearch = (e) => {
         const userTypeSearchType = e.target.value;
-        if (userTypeSearchType === '') setSearchResult([]);
         setSearchValue(userTypeSearchType);
     };
     const hanldeClearSearch = () => {
@@ -50,8 +49,8 @@ function Search() {
                     <div className={cx('search-result')} tabIndex={-1} {...attrs}>
                         <PobberWrapper>
                             <h1 className={cx('search-title')}>Accounts</h1>
-                            {searchResult.map((user) => {
-                                return <AccountItem data={user} />;
+                            {searchResult.map((user, index) => {
+                                return <AccountItem data={user} key={index} itemKey={index} />;
                             })}
                         </PobberWrapper>
                     </div>
