@@ -20,7 +20,7 @@ import { UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
 import { Link } from 'react-router-dom';
-import routesConfig from '~/config/routes';
+import config from '~/config';
 const MENU_ITEM = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
@@ -88,7 +88,7 @@ const Header = () => {
     return (
         <header className={styles.wrapper}>
             <div className={cx('inner')}>
-                <Link to={routesConfig.home} className={cx('logo')}>
+                <Link to={config.routes.home} className={cx('logo')}>
                     <img src={images.logo} alt="logo-tiktok" />
                 </Link>
                 {/* Search */}
