@@ -16,7 +16,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
-import { UploadIcon } from '~/components/Icons';
+import { UploadIcon, MessageIcon, ActivityIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
 import { Link } from 'react-router-dom';
@@ -99,6 +99,16 @@ const Header = () => {
                             <Tippy content="Upload video" placement="bottom" deplay={[0, 200]}>
                                 <button className={cx('action-btn')}>
                                     <UploadIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy content="Message" placement="bottom" deplay={[0, 200]}>
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy content="Activity" placement="bottom" deplay={[0, 200]}>
+                                <button className={cx('action-btn')}>
+                                    <ActivityIcon />
                                 </button>
                             </Tippy>
                         </>

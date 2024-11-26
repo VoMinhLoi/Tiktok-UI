@@ -16,13 +16,13 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
-    const debounced = useDebounce(searchValue, 700);
-    // console.log(debounced);
+    const debouncedValue = useDebounce(searchValue, 700);
+    // console.log(debouncedValue);
     useEffect(() => {
-        if (debounced.trim()) {
+        if (debouncedValue.trim()) {
             const fetchAPI = async () => {
                 setLoading(true);
-                const result = await searchServices.search(debounced);
+                const result = await searchServices.search(debouncedValue);
                 setSearchResult(result);
                 setLoading(false);
             };
@@ -30,7 +30,7 @@ function Search() {
         } else {
             setSearchResult([]);
         }
-    }, [debounced]);
+    }, [debouncedValue]);
     const hanldeChange = (e) => {
         const userTypeSearchValueType = e.target.value;
         if (!userTypeSearchValueType.startsWith(' ')) setSearchValue(userTypeSearchValueType);
